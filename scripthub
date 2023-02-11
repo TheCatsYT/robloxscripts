@@ -12,4 +12,3 @@ end)
 MainSection:NewButton("Universal Aimbot", "Execute this to get Aimbot.", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/TheCatsYT/robloxscripts/main/aimbot'))()
 end)
-
