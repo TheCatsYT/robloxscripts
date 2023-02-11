@@ -7,5 +7,5 @@ local MainSection = Main:NewSection("Main")
 
 
 MainSection:NewButton("Universal ESP", "Execute this to get ESP.", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/TheCatsYT/scripts/main/Universal%20ESP?token=GHSAT0AAAAAAB6UNGFUWL5OEM4NQUNYNCTOY7G647A",true))();
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/TheCatsYT/robloxscripts/main/Universal%20ESP"))();
 end)
