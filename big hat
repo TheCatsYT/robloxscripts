@@ -1,0 +1,198 @@
+--[[
+Planet Size Hat (Literally)
+Need 2 people (Can use Alternatives Acc)
+And need to be R15
+(THIS CAN MAKE LAG OR ETC)
+(THIS CAN SCALE UP INTO THE MAP)
+
+Receiver is bald person (Pure Avatar not through deleting the hats with exploits)
+
+Giver is the one who wears rthro hats
+
+You Can Use Alts To Do It
+
+Made By Fedoratum
+]]--
+
+-- Type the giver and receiver
+
+-- YOU CAN USE ALTS
+
+local giver = "person with rthro hat"
+local receiver = "bald avatar person"
+
+--[[
+Example :
+local giver = "ROBLOX"
+local receiver = "Builderman"
+
+Same name placement for both person to execute script
+]]--
+
+-- Option For Receiver
+AnnoyingSpin = true
+-- true is on and false is off
+-- Makes you spin when hat big as map
+-- (Very annoying and more reactions)
+
+function mOut(txt, type)
+if type == 1 then
+spawn(function()
+local m = Instance.new("Message", game.CoreGui)
+m.Text = txt
+task.wait(3)
+m:Destroy()
+end)
+elseif type == 2 then
+spawn(function()
+local h = Instance.new("Hint", game.CoreGui)
+h.Text = txt
+task.wait(3)
+h:Destroy()
+end)
+end
+end
+
+local p = game:GetService"Players"
+local pl = p.LocalPlayer
+local c = pl.Character
+
+-- Check 1 (Checking if plr exist)
+
+if p:FindFirstChild(receiver) and p:FindFirstChild(giver) then
+mOut("Receiver and Giver Exists", 1)
+else
+mOut("Both or one people not exist", 1)
+return
+end
+
+function getRoot(char)
+	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
+	return rootPart
+end
+
+-- Check 2 (Waiting if both is ready)
+
+local Started = false
+local cht
+
+if pl.Name == giver then
+cht = p[receiver].Chatted:Connect(function(msg)
+if msg == "instance start" then
+game.Players:Chat("instance start")
+Started = true
+elseif msg == "Script done from receiver" then
+mOut("All Done Now Hats Size Of Map", 1)
+cht:Disconnect()
+end
+end)
+elseif pl.Name == receiver then
+cht = p[giver].Chatted:Connect(function(msg)
+if msg == "instance start" then
+game.Players:Chat("instance start")
+Started = true
+end
+end)
+end
+
+local counting = 0
+task.spawn(function()
+while wait(3.8) do
+if Started ~= true then
+game.Players:Chat("instance start")
+counting = counting + 1
+
+if counting == 10 then
+Started = false
+mOut("Response Has Timed Out")
+end
+
+end
+end
+end)
+
+local m = Instance.new("Message", game.CoreGui)
+m.Text = "Waiting For Respond"
+
+repeat wait() until Started == true
+
+-- Starting the job
+
+m:Destroy()
+mOut("Wait Please, Process Started", 1)
+
+if pl.Name == giver then
+
+c.Humanoid.WalkSpeed = 0
+
+for i, v in pairs(c.Humanoid:GetChildren()) do
+        if v:IsA("NumberValue") then
+            for i, v1 in pairs(c:GetChildren()) do
+                if v1:FindFirstChild("AvatarPartScaleType", true) then
+                    repeat
+                        wait()
+                    until v1:FindFirstChild("OriginalSize", true)
+                    v1:FindFirstChild("OriginalSize", true):Destroy()
+                    v:Destroy()
+                end
+            end
+        end
+    end
+
+c.HumanoidRootPart.CFrame = p[receiver].Character.HumanoidRootPart.CFrame
+
+task.wait(5)
+
+game.Players:Chat("First Step Done")
+
+c.Humanoid:Destroy()
+
+elseif pl.Name == receiver then
+c.Humanoid.WalkSpeed = 0
+local q
+q = p[giver].Chatted:Connect(function(msg)
+if msg == "First Step Done" then
+
+task.wait(5)
+
+for i, v in pairs(c.Humanoid:GetChildren()) do
+        if v:IsA("NumberValue") then
+            for i, v1 in pairs(c:GetChildren()) do
+                if v1:FindFirstChild("AvatarPartScaleType", true) then
+                    repeat
+                        wait()
+                    until v1:FindFirstChild("OriginalSize", true)
+                    v1:FindFirstChild("OriginalSize", true):Destroy()
+                    v:Destroy()
+                end
+            end
+        end
+    end
+
+if AnnoyingSpin then
+local enums = Enum.HumanoidStateType:GetEnumItems()
+table.remove(enums, table.find(enums, Enum.HumanoidStateType.None))
+for i, v in pairs(enums) do
+c.Humanoid:SetStateEnabled(v, false)
+end
+c.Humanoid:ChangeState(Enum.HumanoidStateType.Swimming)
+local Spin = Instance.new("BodyAngularVelocity")
+Spin.Name = "Spinning"
+Spin.Parent = getRoot(c)
+Spin.MaxTorque = Vector3.new(0, math.huge, 0)
+Spin.AngularVelocity = Vector3.new(0,30,0)
+end
+
+q:Disconnect()
+
+c.Humanoid.WalkSpeed = 16
+
+mOut("All Done Now Hats Size Of Map", 1)
+game.Players:Chat("Script done from receiver")
+
+cht:Disconnect()
+
+end
+end)
+
+end
